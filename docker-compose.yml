@@ -1,0 +1,12 @@
+services:
+  api:
+    build: .
+    ports: ["8000:8000"]
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-replace-this-with-a-long-secret}
+      DATABASE_URL: sqlite:////app/data/documind.db
+      OLLAMA_URL: http://host.docker.internal:11434
+    volumes: ["documind_data:/app/data"]
+    extra_hosts: ["host.docker.internal:host-gateway"]
+volumes:
+  documind_data:
